@@ -32,7 +32,7 @@ Welcome to the GitHub repo for our WS2812 Mini Light controller. It can turn a W
 
 ## Background
 
-While it may seem a little overkill to use WS2812 strips for a task as simple as turning a light on and off, we have a crap load of WS2812 strips at our makerspace, making it still convenient for us to use them even for very simple applications where no fancy effects are needed (ex. our light fixture in the 3D printing room).
+While it may seem a little overkill to use WS2812 strips for a task as simple as turning a light on and off, we have a crap load of WS2812 strips at our makerspace, making it still convenient for us to use them even for very simple applications where no fancy effects are needed (ex. our light fixture in the 3D printing room). As a result we have decided to create a super cheap and simple controller for our WS2812 strips that can be used for simple light fixtures with little to no fuss. 
 
 > Note: The colorfull and flashy LED lights in our Cafe do not use this controller! For these, you will either have to refer to the [Not-So-Tiny Dimmer](https://github.com/CTXz/Not-so-Tiny-Dimmer) or [W-LED](https://kno.wled.ge/).
 
