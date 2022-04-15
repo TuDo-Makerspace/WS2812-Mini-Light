@@ -30,7 +30,7 @@
 #define DATA_PINS {PB0}    	///< Pin(s) used to communicate with the WS2812 device(s)
 #endif
 
-#define N_LEDS 17        ///< Number of LEDs on your WS2812 device(s)
+#define N_LEDS N        ///< Number of LEDs on your WS2812 device(s)
 #define RESET_TIME 50    ///< Reset time in microseconds (50us recommended by datasheet)
 #define COLOR_ORDER grb  ///< Color order of your WS2812 LEDs (Typically grb or rgb)
 
