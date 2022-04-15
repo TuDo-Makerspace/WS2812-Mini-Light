@@ -18,6 +18,8 @@
  * 
  */
 
+#include <avr/sleep.h>
+
 #include <ws2812_cpp.h>
 
 #ifdef WS2812_TARGET_PLATFORM_ARDUINO_AVR
@@ -39,6 +41,28 @@
 #define G 255
 #define B 255
 
+/**
+ * Puts the MCU to sleep until it's power is turned off.
+ * Based on https://gist.github.com/JChristensen/5616922
+ */
+void go_to_sleep() {
+    byte mcucr1, mcucr2;
+
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    sleep_enable();
+    ADCSRA &= ~_BV(ADEN);                     //disable ADC
+    cli();                                    //stop interrupts to ensure the BOD timed sequence executes as required
+    mcucr1 = MCUCR | _BV(BODS) | _BV(BODSE);  //turn off the brown-out detector
+    mcucr2 = mcucr1 & ~_BV(BODSE);            //if the MCU does not have BOD disable capability,
+    MCUCR = mcucr1;                           //this code has no effect
+    MCUCR = mcucr2;
+    sleep_cpu();                              // go to sleep (Good night)
+    sleep_disable();                          
+}
+
+/**
+ * Main firmware code
+ */
 int main() {
 	uint8_t pins[] = DATA_PINS; /// Data pins
 	ws2812_cfg cfg; // Device config
@@ -65,4 +89,7 @@ int main() {
 	
 	// Complete color data transmission
 	ws2812_dev.close_tx();
+
+	// Sleep until power is turned off
+	go_to_sleep(); // Good night
 }

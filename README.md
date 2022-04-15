@@ -60,7 +60,7 @@ The following fritzing diagram shows how to wire everything together:
 
 The firmware for hte controller was written with Platformio and makes use of the Barebone AVR library, as well as the low level [TinyWS2812 library](https://github.com/CTXz/TinyWS2812). It is highly recommended to use the [Platformio IDE](https://platformio.org/) to build and flash the software, as it automatically handles the dependencies.
 
-The firmware for this controller can be located in the [src](src/) directory of this repository and is fairly straight forward. Upon boot the controller will initialize and set the strip to the specified color. After that the controller is done and simply does nothing until its shut down again.
+The firmware for this controller can be located in the [src](src/) directory of this repository and is fairly straight forward. Upon boot the controller will initialize and set the strip to the specified color. After that the controller is done and will enter sleep until its shut down again (We mustn't constantly update the strip as it latches its color by itself).
 
 ### Parameters
 
