@@ -4,6 +4,16 @@
 
 Welcome to the GitHub repo for our WS2812 Mini Light controller. It can turn a WS2812 strip on and off. This controller is a very simple and easy to use controller. It is a very good and nice controller!
 
+## Table Of Contents
+
+- [Features](#features)
+- [Background](#background)
+- [Hardware](#hardware)
+- [Firmware](#firmware)
+  * [Overview](#overview)
+  * [Flashing](#flashing)
+- [License](#license)
+
 ## Features
 
 - DIY Enterprise lighting solution with open source community development
@@ -22,7 +32,7 @@ Welcome to the GitHub repo for our WS2812 Mini Light controller. It can turn a W
 
 ## Background
 
-While it may seem a little overkill to use WS2812 strips for a task as simple as turning a light on and off, we have a crap load of WS2812 strips at our makerspace, making it still convenient for us to use them even for very simple applications where no fancy effects are needed.
+While it may seem a little overkill to use WS2812 strips for a task as simple as turning a light on and off, we have a crap load of WS2812 strips at our makerspace, making it still convenient for us to use them even for very simple applications where no fancy effects are needed (ex. our light fixture in the 3D printing room).
 
 > Note: The colorfull and flashy LED lights in our Cafe do not use this controller! For these, you will either have to refer to the [Not-So-Tiny Dimmer](https://github.com/CTXz/Not-so-Tiny-Dimmer) or [W-LED](https://kno.wled.ge/).
 
@@ -44,13 +54,19 @@ The following fritzing diagram shows how to wire everything together:
 
 ![](docs/Fritzing.png)
 
-## Software
+## Firmware
 
 ### Overview
 
-The software was written with Platformio and makes use of the Barebone AVR library, as well as the low level [TinyWS2812 library](https://github.com/CTXz/TinyWS2812). It is highly recommended to use the [Platformio IDE](https://platformio.org/) to build and flash the software, as it automatically handles the dependencies.
+The firmware for hte controller was written with Platformio and makes use of the Barebone AVR library, as well as the low level [TinyWS2812 library](https://github.com/CTXz/TinyWS2812). It is highly recommended to use the [Platformio IDE](https://platformio.org/) to build and flash the software, as it automatically handles the dependencies.
 
-The strip color can be configured at the top of the [main.cpp](src/main.cpp) file:
+The firmware for this controller can be located in the [src](src/) directory of this repository and is fairly straight forward. Upon boot the controller will initialize and set the strip to the specified color. After that the controller is done and simply does nothing until its shut down again.
+
+### Parameters
+
+The firmware offers a few parameters that can be set to adjust the behavior of the controller.
+
+The strip color can be configured at the top of the [main.cpp](src/main.cpp) file. By default, it is set to white:
 
 ```cpp
 #define R 255
@@ -58,7 +74,11 @@ The strip color can be configured at the top of the [main.cpp](src/main.cpp) fil
 #define B 255
 ```
 
-The software is fairly straight forward: Upon boot the controller will initialize and set the strip to the specified color. After that the controller is done and does nothing until its shut down again. 
+The strip size can also be configured at the top of the [main.cpp](src/main.cpp) file, where N must be replaced with the number of LEDs in the strip.
+
+```cpp
+#define N_LEDS N
+```
 
 ### Flashing
 
