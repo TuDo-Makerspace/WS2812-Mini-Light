@@ -6,13 +6,15 @@ Welcome to the GitHub repo for our WS2812 Mini Light controller. It can turn a W
 
 ## Table Of Contents
 
-- [Features](#features)
-- [Background](#background)
-- [Hardware](#hardware)
-- [Firmware](#firmware)
-  * [Overview](#overview)
-  * [Flashing](#flashing)
-- [License](#license)
+- [WS2812 Mini Light](#ws2812-mini-light)
+  - [Table Of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Background](#background)
+  - [Hardware](#hardware)
+  - [Firmware](#firmware)
+    - [Overview](#overview)
+    - [Flashing](#flashing)
+  - [License](#license)
 
 ## Features
 
@@ -32,7 +34,7 @@ Welcome to the GitHub repo for our WS2812 Mini Light controller. It can turn a W
 
 ## Background
 
-While it may seem a little overkill to use WS2812 strips for a task as simple as turning a light on and off, we have a crap load of WS2812 strips at our makerspace, making it still convenient for us to use them even for very simple applications where no fancy effects are needed (ex. our light fixture in the 3D printing room).
+While it may seem a little overkill to use WS2812 strips for a task as simple as turning a light on and off, we have a crap load of WS2812 strips at our makerspace, making it still convenient for us to use them even for very simple applications where no fancy effects are needed (ex. our light fixture in the 3D printing room). As a result we have decided to create a super cheap and simple controller for our WS2812 strips that can be used for simple light fixtures with little to no fuss. 
 
 > Note: The colorfull and flashy LED lights in our Cafe do not use this controller! For these, you will either have to refer to the [Not-So-Tiny Dimmer](https://github.com/CTXz/Not-so-Tiny-Dimmer) or [W-LED](https://kno.wled.ge/).
 
@@ -60,25 +62,7 @@ The following fritzing diagram shows how to wire everything together:
 
 The firmware for hte controller was written with Platformio and makes use of the Barebone AVR library, as well as the low level [TinyWS2812 library](https://github.com/CTXz/TinyWS2812). It is highly recommended to use the [Platformio IDE](https://platformio.org/) to build and flash the software, as it automatically handles the dependencies.
 
-The firmware for this controller can be located in the [src](src/) directory of this repository and is fairly straight forward. Upon boot the controller will initialize and set the strip to the specified color. After that the controller is done and simply does nothing until its shut down again.
-
-### Parameters
-
-The firmware offers a few parameters that can be set to adjust the behavior of the controller.
-
-The strip color can be configured at the top of the [main.cpp](src/main.cpp) file. By default, it is set to white:
-
-```cpp
-#define R 255
-#define G 255
-#define B 255
-```
-
-The strip size can also be configured at the top of the [main.cpp](src/main.cpp) file, where N must be replaced with the number of LEDs in the strip.
-
-```cpp
-#define N_LEDS N
-```
+The firmware for this controller can be located in the [src](src/) directory of this repository and is fairly straight forward. Upon boot the controller will initialize and set the strip to the specified color. After that the controller is done and will enter sleep until its shut down again (We mustn't constantly update the strip as it latches its color by itself).
 
 ### Flashing
 
